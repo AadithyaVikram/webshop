@@ -1,0 +1,13 @@
+CREATE TABLE users (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE orders (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	description VARCHAR(255),
+	price DECIMAL,
+	user_id BIGINT NOT NULL,
+	package_id BIGINT,
+	FOREIGN KEY (user_id) REFERENCES users
+);

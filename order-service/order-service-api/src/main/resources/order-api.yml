@@ -1,0 +1,110 @@
+openapi: "3.0.3"
+info:
+  title: Order Service API
+  description: API definitions of Order Service
+  version: 1.0.0
+
+paths:
+  /api/v1/aggregatedorders/{id}:
+    get:
+      tags:
+        - Order
+      operationId: getAggregatedOrder
+      description: Returns the order and the package associated with the provided id in path
+      parameters:
+        - name: id
+          in: path
+          description: The id of the queried order
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Normal response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderAndPackageModel"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+  /api/v1/orders/{id}:
+    get:
+      tags:
+        - Order
+      operationId: getOrder
+      description: Returns the order associated with the provided id in path
+      parameters:
+        - name: id
+          in: path
+          description: The id of the queried order
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Normal response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OrderModel"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+
+components:
+  schemas:
+    OrderModel:
+      type: object
+      description: An order
+      properties:
+        id:
+          description: The identifier of the order
+          type: integer
+          format: int64
+        description:
+          description: The description of the order
+          type: string
+        price:
+          description: The price of the order
+          type: number
+          format: double
+    PackageModel:
+      type: object
+      description: A package
+      properties:
+        id:
+          description: The identifier of the package.
+          type: integer
+          format: int64
+        status:
+          description: The status of the package.
+          type: string
+        expectedShippingDate:
+          description: Expected shipping date of the package.
+          type: string
+          format: date
+    ErrorModel:
+      type: object
+      description: an error
+      properties:
+        message:
+          description: The message of the error.
+          type: string
+    OrderAndPackageModel:
+      type: object
+      description: the order and the model objects together
+      properties:
+        order:
+          $ref: "#/components/schemas/OrderModel"
+        package:
+          $ref: "#/components/schemas/PackageModel"
+

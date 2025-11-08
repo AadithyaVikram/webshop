@@ -1,0 +1,58 @@
+openapi: "3.0.3"
+info:
+  title: Package Service API
+  description: API definitions of Package Service
+  version: 1.0.0
+
+paths:
+  /api/v1/packages/{id}:
+    get:
+      tags:
+        - Shipping
+      operationId: getPackage
+      description: Returns the package associated with the provided id in path
+      parameters:
+        - name: id
+          in: path
+          description: The id of the queried package
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Normal response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PackageModel"
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorModel"
+components:
+  schemas:
+    PackageModel:
+      type: object
+      description: A package
+      properties:
+        id:
+          description: The identifier of the package.
+          type: integer
+          format: int64
+        status:
+          description: The status of the package.
+          type: string
+        expectedShippingDate:
+          description: Expected shipping date of the package.
+          type: string
+          format: date
+    ErrorModel:
+      type: object
+      description: an error
+      properties:
+        message:
+          description: The message of the error.
+          type: string

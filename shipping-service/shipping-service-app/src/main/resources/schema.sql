@@ -1,0 +1,12 @@
+CREATE TABLE users (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE packages (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	status VARCHAR(30) NOT NULL,
+	expected_shipping_date DATE,
+    user_id BIGINT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users
+);

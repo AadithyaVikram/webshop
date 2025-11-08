@@ -1,0 +1,11 @@
+package com.epam.training.order.clientsecurity;
+
+import feign.RequestTemplate;
+
+public class JwtTokenRequestInterceptor implements feign.RequestInterceptor{
+
+    @Override
+    public void apply(RequestTemplate requestTemplate) {
+        requestTemplate.header("Authorization", "Bearer "+"eyJhbGciOiJSUzI1NiJ9.eyJyb2xlcyI6WyJST0xFX1VTRVIiXSwibmFtZSI6IkRhdmlkIEJyb3duIiwic3ViIjoiZGF2aWQuYnJvd25AdXNlcnMuY29tIiwiaWF0IjoxNzI2NzQxMTQ5LCJleHAiOjE3MjY3NDQ3NDl9.Jpdgj2kXs21uVh21NfnrCa3z2jLOzb2d7VKvr60ORqEDZB5OGDUEvqOU5JCuwMT3ChxDB-vVzMtprdM-sNQea0KEKAmlJILvVQlnQo4FazlMxEB0KUnQ8Ssr5gOD8Kofqm8GKHjtwMn7-_c0IJYCD0uYb2zo9GLuj72Ve4jjdTERBOsVmLLp1eNxsfPdNY593Zu7bcNzQUcHEijx6OF0jHzbGtEbj0AIIztw3kllO6aovn_-RPb6k0FwxJvKAIMKL_Xc4OWTXx14TBnKSK0EhfxpXUxwObGRbxWfEIg0EJXBImJibMGKWWQ5oeBHNcAaXYZrambsHyBTKwqZqaoAxQ");
+    }
+}
